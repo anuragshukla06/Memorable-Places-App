@@ -38,6 +38,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        
+                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                if (position != 0) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setIcon(R.drawable.common_full_open_on_phone)
+                            .setTitle("Delete?")
+                            .setMessage("Do you really wanna delete it?")
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    places.remove(position);
+                                    arrayAdapter.notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("NO", null)
+                            .show();
+                }
+
+                return true;
+            }
+        });
+
 
     }
 }
